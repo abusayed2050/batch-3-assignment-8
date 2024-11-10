@@ -1,0 +1,19 @@
+{
+  "name": "batch-3-assignment-8",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/abusayed2050/batch-3-assignment-8.git",
+  "author": "abusayed2050 <abu.sayed2050@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@prisma/client": "^5.22.0",
+    "@types/node": "^22.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "vercel": "^37.14.0"
+  }
+}
