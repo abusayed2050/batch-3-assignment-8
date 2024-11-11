@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Book, PrismaClient } from "@prisma/client";
 import { BookTypes } from "./book.interface";
 
 const prisma = new PrismaClient();
@@ -57,8 +57,27 @@ const readBookbyID = async (bookId: string) => {
   return result;
 };
 
+const updateBook = async (bookId: string, data: BookTypes) => {
+  const result = await prisma.book.update({
+    where: {
+      bookId,
+    },
+    data,
+  });
+  return {
+    data: {
+      bookId: result.bookId,
+      title: result.title,
+      genre: result.genre,
+      publishedYear: result.publishedYear,
+      totalCopies: result.totalCopies,
+      availableCopies: result.availableCopies,
+    },
+  };
+};
 export const BookServices = {
   createBook,
   ReadAllBooks,
   readBookbyID,
+  updateBook,
 };

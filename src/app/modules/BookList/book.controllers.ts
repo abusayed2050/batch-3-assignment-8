@@ -72,8 +72,33 @@ const readBookbyID = async (req: Request, res: Response) => {
   }
 };
 
+const updateBook = async (req: Request, res: Response) => {
+  const { bookId } = req.params;
+  try {
+    const result = await BookServices.updateBook(bookId, req.body);
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Book updated successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err?.name || "something went wrong",
+      error: {
+        name: err?.name,
+        message: err?.message,
+        stack: err?.stack,
+      },
+    });
+  }
+};
+
 export const BookControllers = {
   createBook,
   ReadAllBooks,
   readBookbyID,
+  updateBook,
 };
