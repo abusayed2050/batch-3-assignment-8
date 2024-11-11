@@ -6,8 +6,9 @@ const createBook = async (req: Request, res: Response) => {
   try {
     const result = await BookServices.createBook(req.body);
 
-    res.status(200).json({
+    res.json({
       Success: true,
+      status: 201,
       message: "Book created successfully..... ",
       data: result.data,
     });

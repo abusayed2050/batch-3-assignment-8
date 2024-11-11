@@ -15,7 +15,14 @@ const createBook = async (param: BookTypes) => {
   });
 
   return {
-    data: result,
+    data: {
+      bookId: result.bookId,
+      title: result.title,
+      genre: result.genre,
+      publishedYear: result.publishedYear,
+      totalCopies: result.totalCopies,
+      availableCopies: result.availableCopies,
+    },
   };
 };
 
