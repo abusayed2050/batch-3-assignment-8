@@ -41,6 +41,11 @@ const ReadAllBooks = async (param: BookTypes) => {
 };
 
 const readBookbyID = async (bookId: string) => {
+  await prisma.book.findUniqueOrThrow({
+    where: {
+      bookId,
+    },
+  });
   const result = await prisma.book.findUnique({
     where: {
       bookId,
@@ -58,6 +63,11 @@ const readBookbyID = async (bookId: string) => {
 };
 
 const updateBook = async (bookId: string, data: BookTypes) => {
+  await prisma.book.findUniqueOrThrow({
+    where: {
+      bookId,
+    },
+  });
   const result = await prisma.book.update({
     where: {
       bookId,
@@ -75,9 +85,23 @@ const updateBook = async (bookId: string, data: BookTypes) => {
     },
   };
 };
+
+const deleteBook = async (bookId: string) => {
+  await prisma.book.findUniqueOrThrow({
+    where: {
+      bookId,
+    },
+  });
+  const result = await prisma.book.delete({
+    where: {
+      bookId,
+    },
+  });
+};
 export const BookServices = {
   createBook,
   ReadAllBooks,
   readBookbyID,
   updateBook,
+  deleteBook,
 };
