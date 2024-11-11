@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { MemberServices } from "./member.services";
 
 const createMember = async (req: Request, res: Response) => {
-  console.log("controller:", req.body);
   try {
     const result = await MemberServices.createMember(req.body);
 

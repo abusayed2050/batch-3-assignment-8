@@ -1,4 +1,4 @@
-import { Book, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { BookTypes } from "./book.interface";
 
 const prisma = new PrismaClient();

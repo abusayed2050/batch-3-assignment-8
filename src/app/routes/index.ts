@@ -1,6 +1,7 @@
 import express from "express";
 import { LMRoutes } from "../modules/BookList/book.routes";
 import { LMMmemberRoutes } from "../modules/memberList/member.routes";
+import { LMBorrowRoutes } from "../modules/BorrowBook/borrow.routes";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const moduleRoutes = [
   {
     path: "/members",
     route: LMMmemberRoutes,
+  },
+  {
+    path: "/borrow",
+    route: LMBorrowRoutes,
   },
 ];
 

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { BookServices } from "./book.services";
 
 const createBook = async (req: Request, res: Response) => {
-  console.log("controller:", req.body);
   try {
     const result = await BookServices.createBook(req.body);
 
