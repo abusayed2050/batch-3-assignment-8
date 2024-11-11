@@ -48,10 +48,10 @@ const ReadAllBooks = async (req: Request, res: Response) => {
   }
 };
 
-const readBoobyID = async (req: Request, res: Response) => {
+const readBookbyID = async (req: Request, res: Response) => {
   const { bookId } = req.params;
   try {
-    const result = await BookServices.readBoobyID(bookId);
+    const result = await BookServices.readBookbyID(bookId);
 
     res.status(200).json({
       success: true,
@@ -75,5 +75,5 @@ const readBoobyID = async (req: Request, res: Response) => {
 export const BookControllers = {
   createBook,
   ReadAllBooks,
-  readBoobyID,
+  readBookbyID,
 };

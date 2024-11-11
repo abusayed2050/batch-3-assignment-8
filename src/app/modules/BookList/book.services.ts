@@ -40,10 +40,25 @@ const ReadAllBooks = async (param: BookTypes) => {
   return result;
 };
 
-const readBoobyID = async () => {};
+const readBookbyID = async (bookId: string) => {
+  const result = await prisma.book.findUnique({
+    where: {
+      bookId,
+    },
+    select: {
+      bookId: true,
+      title: true,
+      genre: true,
+      publishedYear: true,
+      totalCopies: true,
+      availableCopies: true,
+    },
+  });
+  return result;
+};
 
 export const BookServices = {
   createBook,
   ReadAllBooks,
-  readBoobyID,
+  readBookbyID,
 };

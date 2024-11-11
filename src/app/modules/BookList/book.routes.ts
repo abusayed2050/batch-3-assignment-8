@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/", BookControllers.createBook);
 router.get("/", BookControllers.ReadAllBooks);
-router.get("/:bookId", BookControllers.ReadAllBooks);
+router.get("/:bookId", BookControllers.readBookbyID);
 
 export const LMRoutes = router;
