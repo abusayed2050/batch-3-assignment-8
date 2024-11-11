@@ -40,6 +40,39 @@ const borrowBook = async (data: BorrowBookTypes) => {
   };
 };
 
+const returnBook = async (data: BorrowBookTypes) => {
+  const { borrowId } = data;
+  const findBorrowBook = await prisma.borrowRecord.findUnique({
+    where: { borrowId },
+  });
+
+  if (!findBorrowBook) {
+    throw new Error("Borrow book record not found");
+  }
+
+  const findBook = await prisma.book.findUnique({
+    where: { bookId: findBorrowBook.bookId },
+  });
+
+  const result = await prisma.$transaction(async (tsClient) => {
+    await tsClient.borrowRecord.update({
+      where: { borrowId },
+      data: {
+        returnDate: new Date(),
+      },
+    });
+
+    await tsClient.book.update({
+      where: { bookId: findBook?.bookId },
+      data: {
+        availableCopies: { increment: 1 },
+      },
+    });
+  });
+
+  return result;
+};
 export const borrowBookServices = {
   borrowBook,
+  returnBook,
 };

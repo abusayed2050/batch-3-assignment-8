@@ -18,6 +18,10 @@ const moduleRoutes = [
     path: "/borrow",
     route: LMBorrowRoutes,
   },
+  {
+    path: "/return",
+    route: LMBorrowRoutes,
+  },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
