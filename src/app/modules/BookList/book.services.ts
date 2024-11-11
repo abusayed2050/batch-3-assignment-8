@@ -26,6 +26,24 @@ const createBook = async (param: BookTypes) => {
   };
 };
 
+const ReadAllBooks = async (param: BookTypes) => {
+  const result = await prisma.book.findMany({
+    select: {
+      bookId: true,
+      title: true,
+      genre: true,
+      publishedYear: true,
+      totalCopies: true,
+      availableCopies: true,
+    },
+  });
+  return result;
+};
+
+const readBoobyID = async () => {};
+
 export const BookServices = {
   createBook,
+  ReadAllBooks,
+  readBoobyID,
 };
