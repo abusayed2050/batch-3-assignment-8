@@ -74,9 +74,10 @@ const returnBook = async (data: BorrowBookTypes) => {
 };
 
 const overDueBook = async (param: BorrowBookTypes) => {
+  //find out total due date
   const currentDate = new Date();
   const dueDate = new Date(currentDate);
-  dueDate.setDate(dueDate.getDate() - 14); //find out total due date
+  dueDate.setDate(dueDate.getDate() - 14);
 
   const result = await prisma.borrowRecord.findMany({
     where: {
