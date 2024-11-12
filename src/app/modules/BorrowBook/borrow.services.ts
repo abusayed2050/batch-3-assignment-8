@@ -72,7 +72,42 @@ const returnBook = async (data: BorrowBookTypes) => {
 
   return result;
 };
+
+const overDueBook = async (param: BorrowBookTypes) => {
+  const currentDate = new Date();
+  const dueDate = new Date(currentDate);
+  dueDate.setDate(dueDate.getDate() - 14); //find out total due date
+
+  const result = await prisma.borrowRecord.findMany({
+    where: {
+      returnDate: null,
+      borrowDate: {
+        lt: dueDate, //compare with book borrow date and due date
+      },
+    },
+    include: {
+      book: { select: { title: true } },
+      Member: { select: { name: true } },
+    },
+  });
+
+  //calculate total over due Days and return
+  const overdueBorrowBookList = result.map((data) => {
+    const BorrowBookDays = currentDate.getTime() - data.borrowDate.getTime();
+    const dayByBorrowBook = Math.floor(BorrowBookDays / (1000 * 60 * 60 * 24));
+    const overdueDays = dayByBorrowBook - 14;
+
+    return {
+      borrowId: data.borrowId,
+      bookTitle: data.book.title,
+      borrowerName: data.Member.name,
+      overdueDays,
+    };
+  });
+  return overdueBorrowBookList;
+};
 export const borrowBookServices = {
   borrowBook,
   returnBook,
+  overDueBook,
 };
